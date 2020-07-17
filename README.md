@@ -30,11 +30,24 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. What is React JS and what problems does it solve? Support your answer with concepts introduced in class and from your personal research on the web.
 
+React. js is an open-source JavaScript library that is used for building user interfaces specifically for single-page applications. It's used for handling the view layer for web and mobile apps. React also allows us to create reusable UI components.
+
+The main problem solved by react is the development of large applications that have temporal data changes. The data in such applications is not static so it changes over time.
+
+
+
 1. Describe component state.
+
+React components has a built-in state object. The state object is where you store property values that belongs to the component. When the state object changes, the component re-renders.
+
 
 1. Describe props.
 
+In a React component, props are variables passed to it by its parent component.
+
 1. What are side effects, and how do you sync effects in a React component to changes of certain state or props?
+
+"Side Effect" is not a react-specific term. It is a general concept about behaviours of functions. A function is said to have side effect if it trys to modify anything outside its body. By using   useEffect()
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
