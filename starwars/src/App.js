@@ -1,18 +1,66 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import axios from 'axios';
+import Character from "./components/Character"
+import styled from 'styled-components';
 
+
+
+const GridDiv = styled.div`
+ display: grid;
+ grid-gap: 2%;
+ margin: 2%;
+ grid-template-columns: repeat(5, 1fr)  ;
+ ` 
+const CenterDiv = styled.div`
+
+display:flex;
+justify-content: center;
+margin-top: 3rem;
+
+`
+
+const DiveSize = styled.div`
+width: 90rem;
+
+`
 const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+  
+  const [charactersData, setCharactersData] = useState([])
+  const [pageNumber, setPageNumber] = useState(1)
 
-  // Fetch characters from the API in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+  useEffect(()=>{
+  
+    axios.get(`https://rickandmortyapi.com/api/character/?page=${pageNumber}`)
+    .then(res => setCharactersData(res.data.results))
+    .catch(()=> console.log('there was an error'))
+  }, [pageNumber] )
+
+  
+  
+  
 
   return (
-    <div className="App">
-      <h1 className="Header">Characters</h1>
+    <div>
+    <CenterDiv>
+    <DiveSize>
+      <div className="ui two bottom attached buttons">
+        <div className="ui button" onClick ={()=> pageNumber > 1 ? setPageNumber(pageNumber -1): null} >Previous</div>
+
+        <div className="ui button" onClick ={()=> pageNumber < 30 ? setPageNumber(pageNumber +1): null}>Next</div>
+      </div>
+      </DiveSize>
+    </CenterDiv>
+
+    <div style={{textAlign: "center"}}>
+      <GridDiv>
+      {charactersData.map(data => <Character  key ={data.id} data ={data} />)}
+      </GridDiv>
     </div>
+    
+
+    </div>
+    
   );
 }
 
